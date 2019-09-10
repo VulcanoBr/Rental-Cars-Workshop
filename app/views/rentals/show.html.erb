@@ -23,9 +23,12 @@
 <p><%= @rental.customer.description %></p>
 <h2>Carro</h2>
 <%= render @rental.car %>
-<% if @rental.scheduled? %>
-  <%= link_to 'Confirmar Retirada', withdraw_rental_path(@rental), method: :post %>
-<% end %>
+
+<%= @rental.withdraw_link %>
+
+<%# if @rental.scheduled? %>
+  <%#= link_to 'Confirmar Retirada', withdraw_rental_path(@rental), method: :post %>
+<%# end %>
 <% if @rental.active? %>
   <%= link_to "Confirmar Devolução", new_car_return_rental_path(@rental) %>
 <%end %>

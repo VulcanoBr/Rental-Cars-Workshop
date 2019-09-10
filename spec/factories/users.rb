@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.email }
+    email { 'faker@mail.com' }
     password { '12345678' }
     subsidiary
     role { :employee }
