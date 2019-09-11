@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe RentalPresenter do 
+RSpec.describe RentalPresenter do
 include Rails.application.routes.url_helpers
-  
+
   describe '#status' do
     it "should return a green badge for scheduled" do
       car = create(:car)
@@ -38,10 +38,10 @@ include Rails.application.routes.url_helpers
       result = RentalPresenter.new(rental).withdraw_link
 
       expect(result).to match /a/
-      expect(result).to match /Confirmar Retirada/ 
+      expect(result).to match /Confirmar Retirada/
       expect(result).to include withdraw_rental_path(rental.id)
     end
-    
+
     it "should not render a link for active" do
       car = create(:car)
       personal_customer = create(:personal_customer)
@@ -50,7 +50,7 @@ include Rails.application.routes.url_helpers
       result = RentalPresenter.new(rental).withdraw_link
 
       expect(result).to_not include withdraw_rental_path(rental.id)
-      expect(result).to eq ""
+      expect(result).to eq '' 
     end
   end
 
