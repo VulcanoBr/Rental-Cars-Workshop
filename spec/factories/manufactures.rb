@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :manufacture do
-    name { Faker::Name.name }
+    sequence(:name) { |m| "Matbraga#{m}" }
   end
 end
