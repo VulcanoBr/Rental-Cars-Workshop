@@ -1,7 +1,8 @@
 class CnpjValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     unless check_cnpj(value)
-      record.errors[attribute] << (options[:message] || 'is not a valid CNPJ')
+     # record.errors[attribute] << (options[:message] || 'is not a valid CNPJ')
+     record.errors.add(attribute, message: 'Inválido')
     end
   end
 

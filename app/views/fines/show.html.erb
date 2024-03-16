@@ -1,4 +1,6 @@
-<%= render @fine.car %>
+<h1>Multa Registrada </h1>
+
+<%= render partial: 'cars/car_details', locals: { car: @fine.car } %> 
 
 <p>Multa emitida em: <%= l @fine.issued_on %></p>
 <p>Quantidade de pontos: <%= @fine.demerit_points %></p>

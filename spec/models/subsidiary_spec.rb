@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Subsidiary, type: :model do
+
+  describe 'validations' do
+    it "validates presence of name" do
+      subsidiary = build(:subsidiary, name: nil)
+      expect(subsidiary).not_to be_valid
+      expect(subsidiary.errors[:name]).to include("não pode ficar em branco")
+    end
+  end
+
   describe '#current_price' do
     it 'should return the last price' do
       subsidiary = create(:subsidiary)
@@ -10,7 +19,7 @@ RSpec.describe Subsidiary, type: :model do
                                   manufacture: fiat,
                                   car_options: 'Preto')
 
-      car_model.subsidiary_car_models.create(subsidiary: subsidiary, price: 299)
+      #car_model.subsidiary_car_models.create(subsidiary: subsidiary, car_model: car_model, price: 299)
       create(:subsidiary_car_model, subsidiary: subsidiary, price: 120,
                                     car_model: car_model)
 
@@ -26,8 +35,7 @@ RSpec.describe Subsidiary, type: :model do
                                   car_options: 'Preto')
 
       result = -> { subsidiary.current_price(car_model) }
-
-      expect(result).to raise_error('Esse carro não possui preço')
+      expect { subject.current_price(car_model) }.to raise_error('Esse carro não possui preço')
     end
   end
 end

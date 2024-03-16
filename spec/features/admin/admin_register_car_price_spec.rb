@@ -7,11 +7,13 @@ feature 'Admin register car price' do
     fiat = create(:manufacture, name: 'Fiat')
     CarModel.create!(name: 'Opala', year: '1989/1990',
                      manufacture: fiat,
+                     category: 'Standard',
                      car_options: 'Preto')
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar novo preço'
+    click_on 'Registrar'
+    click_on 'Novo preço'
     select 'Opala', from: 'Selecione o modelo'
     fill_in 'Preço', with: '299'
     click_on 'Cadastrar preço'
@@ -27,12 +29,14 @@ feature 'Admin register car price' do
     fiat = create(:manufacture, name: 'Fiat')
     CarModel.create!(name: 'Opala', year: '1989/1990',
                      manufacture: fiat,
+                     category: 'Standard',
                      car_options: 'Preto')
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar novo preço'
-    select '', from: 'Selecione o modelo'
+    click_on 'Registrar'
+    click_on 'Novo preço'
+    select 'Opala', from: 'Selecione o modelo'
     fill_in 'Preço', with: ''
     click_on 'Cadastrar preço'
 

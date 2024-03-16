@@ -17,6 +17,10 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
   end
 
+  def available_cars
+    @available_cars = Car.with_available_status_and_price
+  end
+
   def search
     @car = Car.find_by(license_plate: params[:q])
     return redirect_to @car if @car

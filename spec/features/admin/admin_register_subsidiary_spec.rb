@@ -7,7 +7,8 @@ feature 'Admin register subsidiary' do
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar nova filial'
+    click_on 'Registrar'
+    click_on 'Nova filial'
     fill_in 'Nome', with: 'Rent a car'
     fill_in 'Logradouro', with: 'Vila do Chaves'
     fill_in 'Número', with: '71'
@@ -31,7 +32,8 @@ feature 'Admin register subsidiary' do
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar nova filial'
+    click_on 'Registrar'
+    click_on 'Nova filial'
     click_on 'Criar filial'
 
     expect(page).to have_content('Nome não pode ficar em branco')

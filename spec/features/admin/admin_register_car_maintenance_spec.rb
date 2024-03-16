@@ -4,7 +4,7 @@ feature 'Admin send car to maintenance ' do
   scenario 'successfully' do
     subsidiary = create(:subsidiary)
     user = create(:user, :manager, subsidiary: subsidiary)
-    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '1234567/777')
+    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'solucoes@email.com')
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'XLG-1234', car_km: 199, subsidiary: subsidiary)
@@ -31,7 +31,7 @@ feature 'Admin send car to maintenance ' do
     subsidiary = create(:subsidiary, name: 'Matriz')
     other_sub = create(:subsidiary, name: 'Unidade Paulista')
     user = create(:user, :manager, subsidiary: subsidiary)
-    create(:provider, name: 'Solucoes.ltda', cnpj: '1234567/777')
+    create(:provider, name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'solucoes@email.com')
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     create(:car, car_model: palio, license_plate: 'XLG-1234', car_km: 199, subsidiary: other_sub)
@@ -50,7 +50,7 @@ feature 'Admin send car to maintenance ' do
     subsidiary = create(:subsidiary, name: 'Matriz')
     other_sub = create(:subsidiary, name: 'Unidade Paulista')
     user = create(:user, :admin, subsidiary: subsidiary)
-    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '1234567/777')
+    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'solucoes@email.com')
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'XLG-1234', car_km: 199, subsidiary: other_sub)
@@ -77,7 +77,7 @@ feature 'Admin send car to maintenance ' do
 
   scenario 'cannot send twice' do
     user = create(:user)
-    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '1234567/777')
+    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'solucoes@email.com')
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'XLG-1234',

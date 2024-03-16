@@ -10,7 +10,8 @@ feature 'Admin register car' do
     login_as user, scope: :user
     visit root_path
 
-    click_on 'Registrar novo carro'
+    click_on 'Registrar'
+    click_on 'Novo carro'
     select 'Sport', from: 'Modelo'
     fill_in 'Quilometragem', with: '200'
     fill_in 'Cor', with: 'Verde Musgo'
@@ -31,7 +32,8 @@ feature 'Admin register car' do
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar novo carro'
+    click_on 'Registrar'
+    click_on 'Novo carro'
     click_on 'Criar carro'
 
     expect(page).to have_content('Modelo não pode ficar em branco')

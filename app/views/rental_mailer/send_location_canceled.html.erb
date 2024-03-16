@@ -1,0 +1,10 @@
+<h1>Seu recibo de cancelamento</h1>
+
+<h3>Cliente:</h3>
+<p>Nome: <%= @customer.name %></p>
+
+<h3>Veículo:</h3>
+<p><%= "#{@car.car_model.name} #{@car.license_plate}" %></p>
+
+<h3>Cancelamento:</h3>
+<p>Data de cancelamento: <%= @rental.ended_at.strftime("%d/%m/%Y %H:%M:%S") %></p>

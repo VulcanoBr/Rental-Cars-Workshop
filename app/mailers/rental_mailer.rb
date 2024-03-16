@@ -14,4 +14,11 @@ class RentalMailer < ApplicationMailer
     @car = @rental.car
     mail(to: @customer.email, subject: 'Seu recibo de devolução')
   end
+
+  def send_location_canceled(rental_id)
+    @rental = Rental.find(rental_id)
+    @customer = @rental.customer
+    @car = @rental.car
+    mail(to: @customer.email, subject: "Recibo de cancelamento - #{@car.license_plate}")
+  end
 end

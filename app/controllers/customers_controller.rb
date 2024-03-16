@@ -4,10 +4,16 @@ class CustomersController < ApplicationController
   def new; end
 
   def index
-    @customers = Customer.all
+    @customers = params[:name].present? ? Customer.search_by_name(params[:name]) : Customer.order_by_name.all
   end
 
   def show; end
+
+  def search
+    @customers = Customer.search_by_name(params[:name])
+    return :index if @customers
+    redirect_to root_path, notice: 'Nenhum cliente encontrado !!!'
+  end
 
   private
 

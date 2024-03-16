@@ -26,6 +26,6 @@ class FinesController < ApplicationController
 
   def fine_params
     params.require(:fine).permit(:issued_on, :demerit_points, :fine_value,
-                                 :address)
+                                  :address)
   end
 end

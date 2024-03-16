@@ -3,15 +3,16 @@ require 'rails_helper'
 feature 'User return car from maintenance' do
   scenario 'successfully' do
     user = create(:user)
-    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '1234567/777')
+    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'vulcan@email.com')
     fiat = create(:manufacture, name: 'Fiat')
-    palio = create(:car_model, name: 'Palio', manufacture: fiat)
+    palio = create(:car_model, name: 'Palio', manufacture: fiat, category: 'Standard')
     car = create(:car, car_model: palio, license_plate: 'xlg1234',
                        status: :on_maintenance)
     maintenance = create(:maintenance, car: car, provider: provider)
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Listar'
     click_on 'Carros em Manutenção'
     click_on 'Palio - xlg1234'
     click_on 'Dar baixa em manutenção'
@@ -29,7 +30,7 @@ feature 'User return car from maintenance' do
 
   scenario 'only cars on maintenance' do
     user = create(:user)
-    provider = create(:provider, name: 'Solucoes.ltda')
+    provider = create(:provider, name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'vulcan@email.com')
     car_palio = create(:car, license_plate: 'XLG1234', status: :on_maintenance)
     car_uno = create(:car, license_plate: 'GLS4567')
     create(:maintenance, car: car_palio, provider: provider)
@@ -37,7 +38,7 @@ feature 'User return car from maintenance' do
     # acoes
     login_as user
     visit root_path
-
+    click_on 'Listar'
     click_on 'Carros em Manutenção'
 
     # expectativas
@@ -48,12 +49,15 @@ feature 'User return car from maintenance' do
 
   scenario 'validates invoice and service cost on return' do
     user = create(:user)
-    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '1234567/777')
+    fiat = create(:manufacture, name: 'Fiat')
+    palio = create(:car_model, name: 'Palio', manufacture: fiat, category: 'Standard')
+    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'vulcan@email.com')
     car = create(:car, license_plate: 'XLG1234', status: :on_maintenance)
     create(:maintenance, car: car, provider: provider)
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Listar'
     click_on 'Carros em Manutenção'
     click_on car.car_identification
     click_on 'Dar baixa em manutenção'
@@ -67,7 +71,7 @@ feature 'User return car from maintenance' do
 
   scenario 'generates a debit' do
     user = create(:user)
-    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '1234567/777')
+    provider = Provider.create(name: 'Solucoes.ltda', cnpj: '18.187.641/0001-62', email: 'vulcan@email.com')
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'xlg1234',
@@ -76,6 +80,7 @@ feature 'User return car from maintenance' do
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Listar'
     click_on 'Carros em Manutenção'
     click_on 'Palio - xlg1234'
     click_on 'Dar baixa em manutenção'

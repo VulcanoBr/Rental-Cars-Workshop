@@ -1,11 +1,25 @@
-<%= form_for ([@car, @inspection]) do |f| %>
- <%= f.label :fuel_level, 'Nível de combustível' %>
- <%= f.select(:fuel_level,['0', '1/4', '1/2', '1'] ) %>
- 
- <%= f.label :cleanance_level, 'Nível de Limpeza' %>
- <%= f.select(:cleanance_level,[['Muito sujo', 0], ['Sujo', 1],['Limpo', 5]] ) %>
+<h1>Vistoria</h1>
 
- <%= f.label :damages, 'Avarias' %>
- <%= f.text_area :damages %>
- <%= f.submit 'Vistoriado'%>
+<%= render partial: 'shared/model_errors', locals: { object: @inspection } %>
+
+<%= form_for ([@car, @inspection]) do |f| %>
+  <div class="form-group">
+    <%= f.label :fuel_level, 'Nível de combustível', class: "form-label" %>
+    <%= f.select(:fuel_level, [['0', 0], ['1/4', 1], ['1/2', 2], ['1', 3]], { prompt: "Selecione um nivel combustivel" }, { class: "form-control" }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cleanance_level, 'Nível de Limpeza', class: "form-label" %>
+    <%= f.select(:cleanance_level, [['Muito sujo', 0], ['Sujo', 1], ['Limpo', 5]], { prompt: "Selecione um nivel limpeza" }, { class: "form-control" }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :damages, 'Avarias', class: "form-label" %>
+    <%= f.text_area :damages, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Vistoriado', class: "btn btn-primary" %>
+    <%= link_to 'Cancelar', root_path, class:"btn btn-outline-danger" %>
+  </div>
 <% end %>

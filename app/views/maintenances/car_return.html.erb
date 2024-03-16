@@ -1,4 +1,6 @@
-<%= render @maintenance.car %>
+<h1> Retorno da Manutenção </h1>
+
+<%= render partial: 'cars/car_details', locals: { car: @maintenance.car } %> 
 
 <h2>Manutenção Concluída</h2>
 <dl class="row">

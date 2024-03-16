@@ -9,11 +9,12 @@
   </div>
   <div class="form-group">
     <%= f.label :cpf  %>
-    <%= f.text_field :cpf, class:'form-control' %>
+    <%= f.text_field :cpf, class:'form-control', maxlength:'14' %>
   </div>
   <div class="form-group">
     <%= f.label :phone %>
     <%= f.text_field :phone, class:'form-control' %>
   </div>
-  <%= f.submit "Cadastrar cliente", class: 'btn btn-primary' %>
+  <%= f.submit "Salvar cliente", class: 'btn btn-primary' %>
+  <%= link_to 'Cancelar', root_path, class:"btn btn-outline-danger" %>
 <% end %>

@@ -1,4 +1,4 @@
-class CreateInspections < ActiveRecord::Migration[5.2]
+class CreateInspections < ActiveRecord::Migration[7.1]
   def change
     create_table :inspections do |t|
       t.integer :fuel_level

@@ -8,10 +8,12 @@ feature 'Admin register car model' do
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar novo modelo'
+    click_on 'Registrar'
+    click_on 'Novo modelo'
     fill_in 'Nome', with: 'Fiat Novo Uno 1.0'
     fill_in 'Ano', with: '2014/2015'
     select 'Fiat', from: 'Marca'
+    select 'Standard', from: 'Categoria'
     fill_in 'Características', with: '2 portas,5 pessoas'
     click_on 'Criar modelo'
 
@@ -32,7 +34,8 @@ feature 'Admin register car model' do
 
     login_as user, scope: :user
     visit root_path
-    click_on 'Registrar novo modelo'
+    click_on 'Registrar'
+    click_on 'Novo modelo'
     click_on 'Criar modelo'
 
     expect(page).to have_content('Nome não pode ficar em branco')

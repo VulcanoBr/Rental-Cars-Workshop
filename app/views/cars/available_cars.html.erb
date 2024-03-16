@@ -1,0 +1,29 @@
+<h2>Carros Disponiveis</h2>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>Descrição</h4>
+    </div>
+    <div class="col">
+      <h4>Ano</h4>
+    </div>
+    <div class="col">
+      <h4>Diária</h4>
+    </div>
+  </div>
+
+  <% @available_cars.each do |available_car| %>
+    <div class="row">
+      <div class="col">
+        <p><%= link_to available_car.car_identification, car_path(available_car.id) %></p>
+      </div>
+      <div class="col">
+        <p><%= available_car.car_model.year %></p>
+      </div>
+      <div class="col">
+        <p><%= number_to_currency(available_car&.car_price || 0, unit: 'R$', separator: ',', delimiter: '.') %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

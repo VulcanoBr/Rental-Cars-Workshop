@@ -8,10 +8,14 @@ class InspectionsController < ApplicationController
     @car = Car.find(params[:car_id])
     @inspection = @car.inspections.build(inspection_params)
     @inspection.user = current_user
-    @inspection.car.available!
-    return redirect_to @car if @inspection.save
-
-    render :new
+    if @inspection.save
+      @inspection.car.available!
+      redirect_to @car
+      flash[:success] = 'Veiculo Vistoriado com sucesso'
+    else
+      flash[:error] = 'Você deve preencher todos os campos'
+      render :new
+    end
   end
 
   private

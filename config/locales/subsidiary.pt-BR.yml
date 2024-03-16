@@ -2,7 +2,7 @@
 pt-BR:
   activerecord:
     models:
-      subsidiary: 'Fabricante'
+      subsidiary: 'Filial'
     attributes:
       subsidiary:
         name: 'Nome'

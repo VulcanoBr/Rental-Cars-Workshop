@@ -10,6 +10,7 @@ pt-BR:
       rental:
         car_id: 'Carro'
         customer_id: 'Cliente'
+        daily_price: 'Diaria'
         scheduled_start: 'Retirada Prevista'
         scheduled_end: 'Devolução Prevista'
         started_at: 'Retirada Efetiva'

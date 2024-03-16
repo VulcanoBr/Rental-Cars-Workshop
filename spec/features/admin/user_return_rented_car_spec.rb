@@ -5,17 +5,26 @@ feature 'User return car rental' do
     subsidiary = create(:subsidiary)
     user = create(:user, subsidiary: subsidiary)
     manufacture = create(:manufacture)
-    car_model = create(:car_model, name: 'Palio', manufacture: manufacture)
+    car_model = create(:car_model, name: 'Palio', manufacture: manufacture, category: 'Standard')
     car = create(:car, car_model: car_model, license_plate: 'XLG-1234',
-                       subsidiary: subsidiary, car_km: '100')
+                      subsidiary: subsidiary, car_km: '100', status: :rented)
+    car2 = create(:car, car_model: car_model, license_plate: 'XXX-1234',
+                      subsidiary: subsidiary, car_km: '300', status: :rented)
     customer = create(:personal_customer, email: 'lucas@gmail.com')
-    rental = create(:rental, car: car, customer: customer, user: user)
+    customer2 = create(:personal_customer, email: 'marcos@gmail.com', cpf: '624.299.657-04')
+    allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+    rental = create(:rental, car: car, customer: customer, user: user, status: :active)
+    rental2 = create(:rental, car: car2, customer: customer2, user: user, status: :active)
     expect(RentalMailer).to receive(:send_return_receipt).with(rental.id)
-                                                         .and_call_original
+                                                        .and_call_original
 
     login_as user
     visit root_path
-    click_on "#{rental.id} - XLG-1234"
+    click_on 'Listar'
+    click_on 'Carro(s) Alocado(s)'
+    expect(page).to have_content('Carro(s) Alocado(s)')
+    expect(page).to have_content('Palio - XLG-1234')
+    click_on('Palio - XLG-1234', match: :first)
     click_on 'Confirmar Devolução'
 
     fill_in 'Quilometragem', with: '199'
@@ -28,15 +37,18 @@ feature 'User return car rental' do
 
   scenario 'ensure superior km actually' do
     user = create(:user)
-    car_model = create(:car_model, name: 'Palio')
+    car_model = create(:car_model, name: 'Palio', category: 'Standard')
     car = create(:car, car_model: car_model, license_plate: 'XLG-1234',
-                       subsidiary: user.subsidiary, car_km: 230)
+                       subsidiary: user.subsidiary, car_km: 230, status: :rented)
     customer = create(:personal_customer)
-    rental = create(:rental, car: car, user: user, customer: customer)
+    allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+    rental = create(:rental, car: car, user: user, customer: customer, status: :active)
 
     login_as user
     visit root_path
-    click_on "#{rental.id} - XLG-1234"
+    click_on 'Listar'
+    click_on 'Carro(s) Alocado(s)'
+    click_on('Palio - XLG-1234', match: :first)
     click_on 'Confirmar Devolução'
 
     fill_in 'Quilometragem', with: '199'

@@ -8,6 +8,9 @@
   <dt class="col-sm-3">Marca</dt>
   <dd class="col-sm-9"><%= @car_model.manufacture.name %></dd>
 
+  <dt class="col-sm-3">Categoria</dt>
+  <dd class="col-sm-9"><%= @car_model.category %></dd>
+
   <dt class="col-sm-3">Características</dt>
   <dd class="col-sm-9">
     <% @car_model.car_options.split(',') do |option| %>

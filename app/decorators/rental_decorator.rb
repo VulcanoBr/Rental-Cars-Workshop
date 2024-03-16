@@ -4,6 +4,6 @@ class RentalDecorator < ApplicationDecorator
   def started_at
     return '---' if object.scheduled?
 
-    object.started_at
+    object.started_at.strftime("%d/%m/%Y")
   end
 end

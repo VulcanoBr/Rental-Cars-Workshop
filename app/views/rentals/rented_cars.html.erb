@@ -1,0 +1,30 @@
+<h3>Carro(s) Alocado(s)</h3>
+
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>Descrição</h4>
+    </div>
+    <div class="col">
+      <h4>Retirada</h4>
+    </div>
+    <div class="col">
+      <h4>Previsão Devolução</h4>
+    </div>
+  </div>
+
+  <% @rented_cars.each do |rented_car| %>
+    <div class="row">
+      <div class="col">
+        <p><%= link_to rented_car.car.car_identification, rental_path(rented_car.id) %></p>
+      </div>
+      <div class="col">
+        <p><%= rented_car.started_at.strftime("%d/%m/%Y %H:%M:%S") %></p>
+      </div>
+      <div class="col">
+        <p><%= rented_car.scheduled_end.strftime("%d/%m/%Y %H:%M:%S") %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

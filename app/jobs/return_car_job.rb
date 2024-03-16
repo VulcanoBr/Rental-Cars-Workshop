@@ -1,5 +1,5 @@
 class ReturnCarJob
-  def perfom
+  def perform
     RentalMailer.send_rental_receipt()
   end
 

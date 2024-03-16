@@ -5,17 +5,17 @@ class SubsidiaryCarModelsController < ApplicationController
 
   def new
     @subsidiary_car_model = SubsidiaryCarModel.new
-    @car_models = CarModel.all
+    @car_models = CarModel.with_name_and_category
   end
 
   def create
     @subsidiary_car_model = SubsidiaryCarModel.new subsidiary_params
-    @subsidiary_car_model.subsidiary = current_user.subsidiary
+    @subsidiary_car_model.subsidiary_id = current_user.subsidiary_id
     if @subsidiary_car_model.save
       redirect_to @subsidiary_car_model
       flash[:alert] = 'Preço cadastrado com sucesso'
     else
-      @car_models = CarModel.all
+      @car_models = CarModel.with_name_and_category
       render :new
     end
   end

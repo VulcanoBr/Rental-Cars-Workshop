@@ -5,19 +5,53 @@ RSpec.describe RentalByPeriodQuery do
     it 'should return cars in a range' do
       subsidiary = create(:subsidiary)
       car = create(:car, subsidiary: subsidiary)
+      customer_company = create(:company_customer, email: 'lucas@gmail.com')
+      customer_personal = create(:personal_customer, email: 'lucas@gmail.com')
+      other_subsidiary = create(:subsidiary)
+      other_car = create(:car, subsidiary: other_subsidiary)
+      
+      # Salva a data atual para restaurá-la posteriormente
+      original_date = Date.today
+
+      # Define uma data passada para os testes (por exemplo, 1 de janeiro de 2023)
+      past_date = Date.new(2023, 1, 1)
+
+      allow(Date).to receive(:today).and_return(past_date)
+
+      start = Date.today
+      finish = Date.today + 10
+
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      create_list(:finished_rental, 10, car: car, customer_id: customer_company.id, finished_at: Date.today + 9,
+              scheduled_start: start, scheduled_end: finish, started_at: start, ended_at: finish )
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      create_list(:finished_rental, 5, car: other_car, customer_id: customer_personal.id, finished_at: Date.today + 9,
+                scheduled_start: start, scheduled_end: finish, started_at: start, ended_at: finish)
+      
+      result =  RentalByPeriodQuery.new(start, finish).call
+      expect(result[car.id]).to eq 10
+      expect(result[other_car.id]).to eq 5
+    end
+  
+    it 'should return cars nil' do
+      start = Date.today
+      finish = Date.today + 10
+      
+      create(:subsidiary)
+      car = create(:car)
       customer = create(:personal_customer, email: 'lucas@gmail.com')
       other_subsidiary = create(:subsidiary)
       other_car = create(:car, subsidiary: other_subsidiary)
       
-      start = 3.days.ago
-      finish = 1.days.ago
+      build_list(:finished_rental, 10, car: car, customer_id: customer.id, finished_at: Date.today + 10,
+        status: :finished, scheduled_start: start, scheduled_end: finish, started_at: start, ended_at: finish)
+      build_list(:finished_rental, 5, car: other_car, customer_id: customer.id, finished_at: Date.today + 10,
+      status: :finished, scheduled_start: start, scheduled_end: finish, started_at: start, ended_at: finish)
       
-      create_list(:finished_rental, 10, car: car, customer: customer, finished_at: 2.days.ago)
-      create_list(:finished_rental, 5, car: other_car, customer: customer, finished_at: 2.days.ago)
+      result =  RentalByPeriodQuery.new(start, finish).call
       
-      result =  described_class.new(start..finish).call
-      export(result[car.id]).to eq 10
-      export(result[other_car.id]).to eq 5
+      expect(result[car.id]).to eq nil
+      expect(result[other_car.id]).to eq nil
     end
   end
 end

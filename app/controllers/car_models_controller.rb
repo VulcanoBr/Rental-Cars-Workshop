@@ -19,6 +19,6 @@ class CarModelsController < ApplicationController
   private
 
   def car_model_params
-    params.require(:car_model).permit(%i[name year manufacture_id car_options])
+    params.require(:car_model).permit(%i[name year manufacture_id car_options category])
   end
 end
