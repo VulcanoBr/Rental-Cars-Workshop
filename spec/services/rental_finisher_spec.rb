@@ -11,8 +11,7 @@ RSpec.describe RentalFinisher do
       
       now = Time.zone.now
       mailer = double('Mailer')
-      allow(RentalMailer).to receive(:send_return_receipt).with(any_args)
-      .and_return(mailer)
+      allow(RentalMailer).to receive(:send_return_receipt).with(any_args).and_return(mailer)
       allow(mailer).to receive(:deliver_now)
       allow(Time.zone).to receive(:now).and_return(now)
       

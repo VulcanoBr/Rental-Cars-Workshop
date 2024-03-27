@@ -5,7 +5,7 @@ class RentalMailer < ApplicationMailer
     @car = @rental.car
 
     mail(to: @customer.email,
-         subject: "Recibo de aluguel - #{@rental.rented_code}")
+        subject: "Recibo de aluguel - #{@rental.rented_code}")
   end
 
   def send_return_receipt(rental_id)

@@ -6,7 +6,7 @@ feature 'Admin register inspection' do
     user = create(:user, subsidiary: subsidiary)
     palio = create(:car_model, name: 'Palio')
     create(:car, car_model: palio, license_plate: 'XLG-1234',
-                 subsidiary: user.subsidiary)
+                subsidiary: user.subsidiary)
 
     login_as user
     visit root_path
@@ -27,7 +27,7 @@ feature 'Admin register inspection' do
     user = create(:user, subsidiary: subsidiary)
     palio = create(:car_model, name: 'Palio')
     car = create(:car, car_model: palio, license_plate: 'XLG-1234',
-                 subsidiary: user.subsidiary)
+                subsidiary: user.subsidiary)
 
     login_as user
     visit root_path
@@ -42,6 +42,6 @@ feature 'Admin register inspection' do
     expect(page).to have_content('Nível de Limpeza')
     expect(page).to have_content('Avarias')
     expect(page).to have_button('Vistoriado')
-    #expect(page).to have_current_path(new_car_inspection_path(car.id))
+    
   end
 end

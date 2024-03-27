@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CarModel, type: :model do
   describe 'validations' do
-    # Test presence validations
     it 'validates presence of name' do
       car_model = build(:car_model, name: nil)
       expect(car_model).not_to be_valid

@@ -24,7 +24,6 @@ RSpec.describe Fine, type: :model do
       fine_3 = create(:fine, car_id: car.id, issued_on: "2024-01-01", fine_value: 200)
       
       result = Fine.calculate_fines_cost_by_year(2023)
-      puts("resul = #{result.inspect}")
       expected_result = [
         {
           id: subsidiary.id,

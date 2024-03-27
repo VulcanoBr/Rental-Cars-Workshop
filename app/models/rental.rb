@@ -18,13 +18,6 @@ class Rental < ApplicationRecord
       .where(cars: { status: :scheduled }, rentals: { status: :scheduled })
       .where(rented_code.present? ? ['UPPER(rented_code) = ?', rented_code.upcase] : {})
   }
-  #scope :scheduled, -> {
-  #  joins(:car).where(cars: { status: :scheduled }, rentals: { status: :scheduled })
-  #}
-
-  #scope :rented, -> { 
-  #  joins(:car).where(cars: { status: :rented }, rentals: { status: :active })
-  #} 
 
   scope :rented, ->(rented_code = nil) {
     joins(:car)
@@ -38,7 +31,6 @@ class Rental < ApplicationRecord
     .where("EXTRACT(YEAR FROM started_at) = ?", Time.now.year)
   }
 
-  # Escopo para calcular o valores de alocação, e a quantidade por subsidiária
   scope :finished_in_year, ->(year) {
     where(status: 'finished')
       .where("EXTRACT(YEAR FROM ended_at) = ?", year)

@@ -8,7 +8,6 @@ feature 'User start rental' do
     car_model = create(:car_model, manufacture: manufacture, category: 'Standard')
     subsidiary_car_model = create(:subsidiary_car_model, price: 234.56, subsidiary_id: subsidiary.id, car_model_id: car_model.id)
     car = create(:car, car_model_id: car_model.id, subsidiary_id: subsidiary.id)
-    
     customer = create(:personal_customer)
     allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
     rental = create(:scheduled_rental, car: car, customer: customer, daily_price: 234.56, status: :scheduled)

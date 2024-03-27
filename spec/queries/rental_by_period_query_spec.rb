@@ -10,10 +10,8 @@ RSpec.describe RentalByPeriodQuery do
       other_subsidiary = create(:subsidiary)
       other_car = create(:car, subsidiary: other_subsidiary)
       
-      # Salva a data atual para restaurá-la posteriormente
       original_date = Date.today
 
-      # Define uma data passada para os testes (por exemplo, 1 de janeiro de 2023)
       past_date = Date.new(2023, 1, 1)
 
       allow(Date).to receive(:today).and_return(past_date)

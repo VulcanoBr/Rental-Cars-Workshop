@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+        :recoverable, :rememberable, :validatable
   enum role: { employee: 0, manager: 5, admin: 10 }
 
   belongs_to :subsidiary

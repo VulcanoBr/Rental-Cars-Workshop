@@ -17,13 +17,7 @@ class HomeController < ApplicationController
     end
     @total_service_cost = Maintenance.within_current_year.sum(:service_cost)
     @total_fine_value = Fine.within_current_year.sum(:fine_value)
-
     @total_cost = @total_daily_price - (@total_service_cost + @total_fine_value)
-    #@scheduled_rentals = Rental.scheduled
-
-   # @active_rentals = Rental.active
-   # @available_cars = Car.available
-   # @cars_on_maintenance = Car.where(status: :on_maintenance).first(10)
   end
 
   private

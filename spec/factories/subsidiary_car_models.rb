@@ -11,8 +11,5 @@ FactoryBot.define do
    #   null_car_model { false }
     end
 
-   # after(:build) do |instance, evaluator|
-   #   instance.car_model = nil if evaluator.null_car_model
-   # end
   end
 end

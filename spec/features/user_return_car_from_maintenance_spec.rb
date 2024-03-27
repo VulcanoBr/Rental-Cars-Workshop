@@ -7,7 +7,7 @@ feature 'User return car from maintenance' do
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat, category: 'Standard')
     car = create(:car, car_model: palio, license_plate: 'xlg1234',
-                       status: :on_maintenance)
+                      status: :on_maintenance)
     maintenance = create(:maintenance, car: car, provider: provider)
 
     login_as user, scope: :user
@@ -41,7 +41,6 @@ feature 'User return car from maintenance' do
     click_on 'Listar'
     click_on 'Carros em Manutenção'
 
-    # expectativas
     expect(current_path).to eq maintenances_path
     expect(page).to have_content(car_palio.car_identification)
     expect(page).to_not have_content(car_uno.car_identification)
@@ -75,7 +74,7 @@ feature 'User return car from maintenance' do
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'xlg1234',
-                       status: :on_maintenance)
+                      status: :on_maintenance)
     create(:maintenance, car: car, provider: provider)
 
     login_as user, scope: :user

@@ -81,7 +81,7 @@ feature 'Admin send car to maintenance ' do
     fiat = create(:manufacture, name: 'Fiat')
     palio = create(:car_model, name: 'Palio', manufacture: fiat)
     car = create(:car, car_model: palio, license_plate: 'XLG-1234',
-                       status: :on_maintenance)
+                      status: :on_maintenance)
     create(:maintenance, car: car, provider: provider)
 
     login_as user, scope: :user

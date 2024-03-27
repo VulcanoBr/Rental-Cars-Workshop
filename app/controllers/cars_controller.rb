@@ -19,7 +19,6 @@ class CarsController < ApplicationController
 
   def available_cars
     @available_cars = params[:name].present? ? Car.with_available_status_and_price(params[:name]) : Car.with_available_status_and_price
-    #@available_cars = Car.with_available_status_and_price
   end
 
   def search

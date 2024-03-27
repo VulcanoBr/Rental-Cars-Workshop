@@ -55,14 +55,7 @@ class Car < ApplicationRecord
       .joins("INNER JOIN subsidiary_car_models ON cars.subsidiary_id = subsidiary_car_models.subsidiary_id AND cars.car_model_id = subsidiary_car_models.car_model_id")
       .select("cars.*, subsidiary_car_models.price as car_price")
       .order("car_models.name")
-}
- # scope :with_available_status_and_price, -> {
-  #  joins(:subsidiary, :car_model)
-   #   .where(status: 'available')
-  #    .joins("INNER JOIN subsidiary_car_models ON cars.subsidiary_id = subsidiary_car_models.subsidiary_id AND cars.car_model_id = subsidiary_car_models.car_model_id")
-  #    .select("cars.*, subsidiary_car_models.price as car_price")
-   #   .order("car_models.name") 
-  #}
+  }
 
   def car_identification
     "#{car_model.name} - #{license_plate} - #{car_model.category}"

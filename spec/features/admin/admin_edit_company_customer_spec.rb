@@ -10,13 +10,11 @@ feature 'Admin edit company customer' do
 
     fill_in 'Nome', with: 'Vulcan Ltda (Atualizado)'
     fill_in 'Email', with: 'vulcan_atualizado@exemplo.com'
-    # Preencha outros campos que deseja atualizar
 
     click_on 'Salvar cliente'
 
     expect(page).to have_content('Vulcan Ltda (Atualizado)')
     expect(page).to have_content('vulcan_atualizado@exemplo.com')
-    # Verifique outras informações atualizadas
     expect(page).to have_content('Cliente editado com sucesso')
   end
 

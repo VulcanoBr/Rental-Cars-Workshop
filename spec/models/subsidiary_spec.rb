@@ -18,8 +18,6 @@ RSpec.describe Subsidiary, type: :model do
       car_model = CarModel.create(name: 'Opala', year: '1989/1990',
                                   manufacture: fiat,
                                   car_options: 'Preto')
-
-      #car_model.subsidiary_car_models.create(subsidiary: subsidiary, car_model: car_model, price: 299)
       create(:subsidiary_car_model, subsidiary: subsidiary, price: 120,
                                     car_model: car_model)
 

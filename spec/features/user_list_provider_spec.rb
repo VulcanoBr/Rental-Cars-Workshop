@@ -5,7 +5,6 @@ feature 'View' do
     
     let!(:subsidiary) { create(:subsidiary) }
     let!(:user) { create(:user, subsidiary: subsidiary) }
-    
     let!(:provider) { create(:provider, name: 'Auto Car', cnpj: '19.531.702/0001-20', email: 'autocar@email.com') }
     let!(:providers) { create(:provider, name: 'Auto X', cnpj: '39.352.138/0001-95', email: 'autox@email.com') }
 

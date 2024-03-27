@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Provider, type: :model do
-  # Teste validates :name, :cnpj, presence: true
 
   it 'validates presence of name and cnpj' do
     provider = build(:provider, name: nil, cnpj: '18.187/641.0001.62', email: 'vulcan@email.com' )

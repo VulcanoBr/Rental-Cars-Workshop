@@ -5,20 +5,18 @@ feature 'User canceled rental' do
   
   
   it 'successfully' do
-   # allow(Rental).to receive(:customer_has_active_rental).and_return(rentals: nil)
-   subsidiary = create(:subsidiary)
-   user = create(:user, subsidiary: subsidiary)
-   manufacture = create(:manufacture)
-   car_model = create(:car_model, manufacture: manufacture) 
-   subsidiary_car_model = create(:subsidiary_car_model, price: 234.56, subsidiary_id: subsidiary.id, car_model_id: car_model.id)
-   car= create(:car, car_model_id: car_model.id, subsidiary: user.subsidiary, status: :available)
-   
-   customer = create(:personal_customer, type: "PersonalCustomer") 
-   allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
-   rentals = create(:scheduled_rental, car_id: car.id, user_id: user.id, 
-              customer_id: customer.id, daily_price: 234.56, status: :scheduled) 
- 
+    subsidiary = create(:subsidiary)
+    user = create(:user, subsidiary: subsidiary)
+    manufacture = create(:manufacture)
+    car_model = create(:car_model, manufacture: manufacture) 
+    subsidiary_car_model = create(:subsidiary_car_model, price: 234.56, subsidiary_id: subsidiary.id, car_model_id: car_model.id)
+    car= create(:car, car_model_id: car_model.id, subsidiary: user.subsidiary, status: :available)
     
+    customer = create(:personal_customer, type: "PersonalCustomer") 
+    allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+    rentals = create(:scheduled_rental, car_id: car.id, user_id: user.id, 
+                customer_id: customer.id, daily_price: 234.56, status: :scheduled) 
+  
     login_as user
     visit root_path
     click_on 'Agendar Locação'

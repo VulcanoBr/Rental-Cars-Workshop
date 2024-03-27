@@ -6,9 +6,9 @@ feature 'Admin register car price' do
     user = create(:user, subsidiary: subsidiary)
     fiat = create(:manufacture, name: 'Fiat')
     CarModel.create!(name: 'Opala', year: '1989/1990',
-                     manufacture: fiat,
-                     category: 'Standard',
-                     car_options: 'Preto')
+                    manufacture: fiat,
+                    category: 'Standard',
+                    car_options: 'Preto')
 
     login_as user, scope: :user
     visit root_path
@@ -28,9 +28,9 @@ feature 'Admin register car price' do
     user = create(:user, subsidiary: subsidiary)
     fiat = create(:manufacture, name: 'Fiat')
     CarModel.create!(name: 'Opala', year: '1989/1990',
-                     manufacture: fiat,
-                     category: 'Standard',
-                     car_options: 'Preto')
+                    manufacture: fiat,
+                    category: 'Standard',
+                    car_options: 'Preto')
 
     login_as user, scope: :user
     visit root_path

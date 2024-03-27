@@ -5,7 +5,6 @@ feature 'View' do
     
     let!(:subsidiary) { create(:subsidiary) }
     let!(:user) { create(:user, subsidiary: subsidiary) }
-    
     let!(:customer) { create(:customer, name: 'Samurai Americano', cpf: '204.193.250-34', email: 'samu@email.com', type: 'PersonalCustomer') }
     let!(:customers) { create(:customer, name: 'Rapina Ativa', cnpj: '39.352.138/0001-95', email: 'rapina@email.com', type: 'CompanyCustomer') }
 

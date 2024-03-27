@@ -7,7 +7,7 @@ RSpec.describe 'Cars API', type: :request do
       manufacture = create(:manufacture, name: 'Honda')
       car_model = create(:car_model, manufacture: manufacture, name: 'City')
       car = create(:car, license_plate: 'EQH-8038', car_model: car_model,
-                         subsidiary: subsidiary)
+                        subsidiary: subsidiary)
 
       get "/api/v1/cars/#{car.id}"
 

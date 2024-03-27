@@ -13,9 +13,6 @@ RSpec.describe RentalMailer, type: :mailer do
       mail = RentalMailer.send_rental_receipt(rental.id)
       expect(mail.to).to include customer.email
       expect(mail.subject).to eq "Recibo de aluguel - #{rental.rented_code}"
-     # expect(mail.body).to include(
-      #  "Segue recibo do #{car.car_model.name} - #{car.license_plate}"
-      #)
       expect(mail.body).to include customer.name
       expect(mail.body).to include "Alugado em: #{rental.created_at.strftime("%d/%m/%Y %H:%M:%S")}"
       expect(mail.body).to include car.car_model.name
@@ -29,7 +26,7 @@ RSpec.describe RentalMailer, type: :mailer do
       manufacture = create(:manufacture)
       car_model = create(:car_model, name: 'Palio', manufacture: manufacture)
       car = create(:car, car_model: car_model, license_plate: 'XLG-1234',
-                         subsidiary: subsidiary, car_km: '100')
+                        subsidiary: subsidiary, car_km: '100')
       customer = create(:personal_customer, name: 'Debora')
       allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
       rental = create(:rental, car: car, customer: customer, user: user)
@@ -51,7 +48,7 @@ RSpec.describe RentalMailer, type: :mailer do
       manufacture = create(:manufacture)
       car_model = create(:car_model, name: 'Palio', manufacture: manufacture)
       car = create(:car, car_model: car_model, license_plate: 'XLG-1234',
-                         subsidiary: subsidiary, car_km: '100')
+                        subsidiary: subsidiary, car_km: '100')
       customer = create(:personal_customer, name: 'Julio')
       allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
       rental = create(:rental, customer_id: customer.id, car_id: car.id, ended_at: Date.today)

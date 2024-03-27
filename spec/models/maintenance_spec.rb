@@ -25,7 +25,6 @@ RSpec.describe Maintenance, type: :model do
     end
   end
 
-  # Test scope
   describe '.cars_on_maintenance' do
     it 'returns maintenance records with cars on maintenance' do
       provider = create(:provider, name: 'Vulcan Ltfa', cnpj: '18.187.641/0001-62', email: 'vulcan@email.com')

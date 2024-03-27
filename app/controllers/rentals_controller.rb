@@ -49,12 +49,6 @@ class RentalsController < ApplicationController
     @costs_by_sub
   end
 
-  #def search
-  #  @rental_status_cars = Rental.rented(params[:rented_code])
-    #return :rented_cars if @customers
-    #redirect_to root_path, notice: 'Nenhum cliente encontrado !!!'
-  #end
-
   def scheduled_cars
     @rental_status_cars = params[:rented_code].present? ? Rental.scheduled(params[:rented_code]) : Rental.scheduled
   end

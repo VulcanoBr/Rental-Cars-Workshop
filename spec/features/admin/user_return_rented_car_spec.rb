@@ -39,7 +39,7 @@ feature 'User return car rental' do
     user = create(:user)
     car_model = create(:car_model, name: 'Palio', category: 'Standard')
     car = create(:car, car_model: car_model, license_plate: 'XLG-1234',
-                       subsidiary: user.subsidiary, car_km: 230, status: :rented)
+                      subsidiary: user.subsidiary, car_km: 230, status: :rented)
     customer = create(:personal_customer)
     allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
     rental = create(:rental, car: car, user: user, customer: customer, rented_code: '2024TYR56RTUZZZ', status: :active)

@@ -87,7 +87,6 @@ RSpec.describe Car, type: :model do
       car2 = create(:car, car_model_id: car_model2.id, subsidiary_id: subsidiary.id, status: 'available')
       expect(Car.with_available_status_and_price.first).to eq(car2)
     end
- end
+  end
   
-
 end
