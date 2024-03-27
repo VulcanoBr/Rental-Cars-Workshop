@@ -13,8 +13,8 @@ feature 'User return car rental' do
     customer = create(:personal_customer, email: 'lucas@gmail.com')
     customer2 = create(:personal_customer, email: 'marcos@gmail.com', cpf: '624.299.657-04')
     allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
-    rental = create(:rental, car: car, customer: customer, user: user, status: :active)
-    rental2 = create(:rental, car: car2, customer: customer2, user: user, status: :active)
+    rental = create(:rental, car: car, customer: customer, user: user, rented_code: '2024TYR56RTUYIU', status: :active)
+    rental2 = create(:rental, car: car2, customer: customer2, user: user, rented_code: '2024TYR56RTUZZZ', status: :active)
     expect(RentalMailer).to receive(:send_return_receipt).with(rental.id)
                                                         .and_call_original
 
@@ -23,8 +23,8 @@ feature 'User return car rental' do
     click_on 'Listar'
     click_on 'Carro(s) Alocado(s)'
     expect(page).to have_content('Carro(s) Alocado(s)')
-    expect(page).to have_content('Palio - XLG-1234')
-    click_on('Palio - XLG-1234', match: :first)
+    expect(page).to have_content('2024TYR56RTUZZZ')
+    click_on('2024TYR56RTUYIU', match: :first)
     click_on 'Confirmar Devolução'
 
     fill_in 'Quilometragem', with: '199'
@@ -42,13 +42,13 @@ feature 'User return car rental' do
                        subsidiary: user.subsidiary, car_km: 230, status: :rented)
     customer = create(:personal_customer)
     allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
-    rental = create(:rental, car: car, user: user, customer: customer, status: :active)
+    rental = create(:rental, car: car, user: user, customer: customer, rented_code: '2024TYR56RTUZZZ', status: :active)
 
     login_as user
     visit root_path
     click_on 'Listar'
     click_on 'Carro(s) Alocado(s)'
-    click_on('Palio - XLG-1234', match: :first)
+    click_on('2024TYR56RTUZZZ', match: :first)
     click_on 'Confirmar Devolução'
 
     fill_in 'Quilometragem', with: '199'

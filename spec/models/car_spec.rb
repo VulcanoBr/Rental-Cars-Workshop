@@ -61,6 +61,33 @@ RSpec.describe Car, type: :model do
     car = create(:car)
     expect(car.current_maintenance).to be_nil
   end
+
+  describe ".with_available_status_and_price" do
+    let!(:subsidiary) { create(:subsidiary) }
+    let!(:manufacture) { create(:manufacture, name: 'Honda') }
+    let!(:car_model) { create(:car_model, name: "Model X", manufacture_id: manufacture.id) }
+    let!(:subsidiary_car_model) { create(:subsidiary_car_model, price: 123.45, subsidiary_id: subsidiary.id, car_model_id: car_model.id) }
+    let!(:available_car) { create(:car, car_model: car_model, subsidiary: subsidiary, status: 'available' ) }
+    let!(:unavailable_car) { create(:car, car_model: car_model, subsidiary: subsidiary, status: 'scheduled' ) }
+
+    it "includes cars with available status" do
+      expect(Car.with_available_status_and_price).to include(available_car)
+    end
+
+    it "excludes cars with unavailable status" do
+      expect(Car.with_available_status_and_price).not_to include(unavailable_car)
+    end
+
+    it "orders cars by car model name" do
+      car_model = create(:car_model, name: "Model X", manufacture_id: manufacture.id)
+      car_model2 = create(:car_model, name: "Model M", manufacture_id: manufacture.id)
+      subsidiary_car_model = create(:subsidiary_car_model, price: 123.45, subsidiary_id: subsidiary.id, car_model_id: car_model.id) 
+      subsidiary_car_model2 = create(:subsidiary_car_model, price: 323.45, subsidiary_id: subsidiary.id, car_model_id: car_model2.id)
+      car1 = create(:car, car_model_id: car_model.id, subsidiary_id: subsidiary.id, status: 'available')
+      car2 = create(:car, car_model_id: car_model2.id, subsidiary_id: subsidiary.id, status: 'available')
+      expect(Car.with_available_status_and_price.first).to eq(car2)
+    end
+ end
   
 
 end

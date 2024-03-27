@@ -11,7 +11,7 @@ class Fine < ApplicationRecord
   scope :calculate_fines_cost_by_year, ->(year) {
       joins(car: :subsidiary)
         .where("EXTRACT(YEAR FROM issued_on) = ?", year)
-        .select('subsidiaries.id, SUM(fine_value) as total_fine_cost, COUNT(*) as fines_count')
+        .select('subsidiaries.id', 'SUM(fine_value) as total_fine_cost', 'COUNT(*) as fines_count')
         .group('subsidiaries.id')
   }
   

@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
   def new
     @car = Car.new
-    @car_models = CarModel.all
+    @car_models = CarModel.with_name_and_category
   end
 
   def create
@@ -9,7 +9,7 @@ class CarsController < ApplicationController
     @car.subsidiary = current_user.subsidiary
     return redirect_to @car if @car.save
 
-    @car_models = CarModel.all
+    @car_models = CarModel.with_name_and_category
     render :new
   end
 
@@ -18,7 +18,8 @@ class CarsController < ApplicationController
   end
 
   def available_cars
-    @available_cars = Car.with_available_status_and_price
+    @available_cars = params[:name].present? ? Car.with_available_status_and_price(params[:name]) : Car.with_available_status_and_price
+    #@available_cars = Car.with_available_status_and_price
   end
 
   def search

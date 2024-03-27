@@ -91,5 +91,53 @@ RSpec.describe Rental, type: :model do
       expect(rental).to be_valid
     end
   end
+
+  describe 'rented scope to search rented ' do
+    it 'returns rentals with rented cars and active status' do
+      customer = create(:personal_customer, cpf: '624.299.657-04', type: 'PersonalCustomer')
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      rented_car = create(:car, status: :rented)
+      active_rental = create(:rental, car: rented_car, customer: customer, status: :active)
+      inactive_rental = create(:rental, car: rented_car, customer: customer, status: :finished)
+
+      expect(Rental.rented).to include(active_rental)
+      expect(Rental.rented).not_to include(inactive_rental)
+    end
+    
+    it 'filters rentals based on rented_code' do
+      customer = create(:personal_customer, cpf: '624.299.657-04', type: 'PersonalCustomer')
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      rented_car = create(:car, status: :rented)
+      rental_with_code = create(:rental, car: rented_car, customer: customer, status: :active, rented_code: '2024ABC123TREWR')
+      rental_without_code = create(:rental, car: rented_car, customer: customer, status: :active, rented_code: nil)
+
+      expect(Rental.rented('2024ABC123TREWR')).to include(rental_with_code)
+      expect(Rental.rented('2024ABC123TREWR')).not_to include(rental_without_code)
+    end
+  end
+
+  describe 'rented scope to search scheduled ' do
+    it 'returns rentals with rented cars and scheduled status' do
+      customer = create(:personal_customer, cpf: '624.299.657-04', type: 'PersonalCustomer')
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      rented_car = create(:car, status: :scheduled)
+      active_rental = create(:rental, car: rented_car, customer: customer, status: :scheduled)
+      inactive_rental = create(:rental, car: rented_car, customer: customer, status: :finished)
+
+      expect(Rental.scheduled).to include(active_rental)
+      expect(Rental.scheduled).not_to include(inactive_rental)
+    end
+    
+    it 'filters rentals based on rented_code' do
+      customer = create(:personal_customer, cpf: '624.299.657-04', type: 'PersonalCustomer')
+      allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
+      rented_car = create(:car, status: :scheduled)
+      rental_with_code = create(:rental, car: rented_car, customer: customer, status: :scheduled, rented_code: '2024ABC123TREWR')
+      rental_without_code = create(:rental, car: rented_car, customer: customer, status: :scheduled, rented_code: nil)
+
+      expect(Rental.scheduled('2024ABC123TREWR')).to include(rental_with_code)
+      expect(Rental.scheduled('2024ABC123TREWR')).not_to include(rental_without_code)
+    end
+  end
   
 end

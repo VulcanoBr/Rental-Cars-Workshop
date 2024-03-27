@@ -14,9 +14,11 @@ Principais Características e Funcionalidades
 -    Ao finalizar o agendamento é gerado um código único da locação
 -    Ao iniciar a locação, deve ser escolhido o carro de acordo com a categoria escolhida
 -    Uma locação deve ser composta de ao menos um carro e 0 ou N acessórios adicionais (AddOns) além de 0 ou N coberturas de seguro
+-   Registrar Multas, Vistoria e Manutenção, somente para carros com status "available".
+-   Registrar empresas que prestam serviço de manutenção.
 
 
-## OBS: Projeto original da CampusCode de 2019; copia do repositorio de bragamat link "https://github.com/bragamat/rental-cars-workshop"
+## OBS: Projeto original do curso da CampusCode de 2019; copia do repositorio de bragamat link "https://github.com/bragamat/rental-cars-workshop"
 
 
 - Este projeto foi atualizado :  
@@ -31,7 +33,7 @@ Principais Características e Funcionalidades
     - Executar bundle check
     - Executar rails app:update, e confirme (Y) todas as trocas solicitadas.
 
-- Acrescentado novos teste, atingindo 93% de cobertura.
+- Acrescentado novos teste, atingindo 90% de cobertura (boa parte dos testes utilizando IA).
 
 - Todas as gens foram atualizadas para as ultimas versões para Ruby on Rails 7.1.0.; exceto a gem do Bootstrap 4.3
 
@@ -39,6 +41,26 @@ Principais Características e Funcionalidades
 - Modificações em layouts, inclusão de um navbar, criação painel para Home/Index
 - Alterada regra de negocio, onde personal client so pode fazer uma nova alocação, quando não há  uma alocação em andamento; e o company client não tem restrição.
 - Incluido rotina para cancelamento de uma alocação, que ainda não foi ativada, com envio de email para o cancelamento.
+
+## Algumas Views
+. Home Index
+<img src="public/images/home_index.jpeg" alt="View Home Index">
+
+. Navbar
+<img src="public/images/navbar1.jpeg" alt="View Navbar">
+
+. Detalhes Carro
+<img src="public/images/car_details.jpeg" alt="View Details Car">
+
+. Carro Agendado
+<img src="public/images/car_scheduled.jpeg" alt="View Scheduled Car">
+
+. Carro Alocado
+<img src="public/images/rented_car.jpeg" alt="View Rented Car">
+
+. Carro em Manutenção
+<img src="public/images/maintenance_car.jpeg" alt="View Maintenance Car">
+
 
 
 ## Como iniciar o projeto

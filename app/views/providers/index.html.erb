@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-between mt-3"> 
-    <h3 class="text-center ">Lista de Fornecedor(es)</h3>
+<div class="d-flex justify-content-between mt-3" id="prov"> 
+    <h4 class="text-center ">Lista de Fornecedor(es)</h4>
     <%= form_tag(providers_path, method: :get) do %>
         <%= text_field_tag(:name, '', { id: 'search-field', placeholder: 'Buscar fornecedor(es)...' } )%>
         <%= submit_tag('Buscar', class: 'btn btn-primary') %>

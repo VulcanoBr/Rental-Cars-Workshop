@@ -29,6 +29,8 @@ module RentalCars
     # Configuração da localização para o Brasil
     config.i18n.default_locale = :"pt-BR"
 
+    #config.action_view.javascript_expansions[:turbo] = %w( stimulus controllers)
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

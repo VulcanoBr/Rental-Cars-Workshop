@@ -17,13 +17,13 @@ feature 'User schedule rental' do
     visit root_path
     click_on 'Agendar Locação'
     select car.car_identification, from: 'car-select'
-    select customer.description, from: 'customer-select'
+    select customer.description.first, from: 'customer-select'
     fill_in 'Retirada Prevista', with: "#{Date.today}"
     fill_in 'Devolução Prevista', with: "#{Date.today + 5}"
     click_on 'Enviar'
 
     expect(page).to have_content(car.car_identification)
-    expect(page).to have_content(customer.description)
+    expect(page).to have_content(customer.description.first)
     expect(page).to have_content(user.email)
     expect(page).to have_content('Status: Agendada')
     expect(page).to have_content("Retirada Prevista: #{(Date.today).strftime("%d/%m/%Y")}")
@@ -69,7 +69,7 @@ feature 'User schedule rental' do
     click_on 'Agendar Locação'
 
     select car.car_identification, from: 'car-select'
-    select customer.description, from: 'customer-select'
+    select customer.description.first, from: 'customer-select'
     fill_in 'Retirada Prevista', with: Date.today
     fill_in 'Devolução Prevista', with: Date.today + 5
     click_on 'Enviar'

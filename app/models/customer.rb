@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
 
   scope :search_by_name, ->(name) {
     where("lower(name) LIKE ?", "%#{name.downcase}%")
+    .order('name')
   }
 
   scope :order_by_name, -> { order("name") }

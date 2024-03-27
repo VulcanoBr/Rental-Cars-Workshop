@@ -13,13 +13,24 @@ class Rental < ApplicationRecord
 
   enum status: { scheduled: 0, active: 5, finished: 10, canceled: 15 }
 
-  scope :scheduled, -> {
-    joins(:car).where(cars: { status: :scheduled }, rentals: { status: :scheduled })
+  scope :scheduled, ->(rented_code = nil) {
+    joins(:car)
+      .where(cars: { status: :scheduled }, rentals: { status: :scheduled })
+      .where(rented_code.present? ? ['UPPER(rented_code) = ?', rented_code.upcase] : {})
   }
+  #scope :scheduled, -> {
+  #  joins(:car).where(cars: { status: :scheduled }, rentals: { status: :scheduled })
+  #}
 
-  scope :rented, -> { 
-    joins(:car).where(cars: { status: :rented }, rentals: { status: :active })
-  } 
+  #scope :rented, -> { 
+  #  joins(:car).where(cars: { status: :rented }, rentals: { status: :active })
+  #} 
+
+  scope :rented, ->(rented_code = nil) {
+    joins(:car)
+      .where(cars: { status: :rented }, rentals: { status: :active })
+      .where(rented_code.present? ? ['UPPER(rented_code) = ?', rented_code.upcase] : {})
+  }
 
   scope :finished_within_current_year, -> {
     where(status: 'finished')

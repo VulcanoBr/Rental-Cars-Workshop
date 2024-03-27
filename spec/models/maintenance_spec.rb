@@ -49,7 +49,7 @@ RSpec.describe Maintenance, type: :model do
       expect(Debit.last.amount).to eq maintenance.service_cost
     end
 
-    it 'should set the car status toavailable' do
+    it 'should set the car status to available' do
       maintenance = create(:maintenance, car: car, provider: provider)
       maintenance.car_return(service_cost: 1000, invoice: 'GHASHASDB123J81NN')
 

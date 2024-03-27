@@ -22,7 +22,6 @@ gem 'securerandom'
 gem 'turbolinks', '>= 5.2'
 gem 'uglifier', '>= 4.2'
 
-
 gem 'bootsnap', '>= 1.17.0', require: false
 
 group :development, :test do

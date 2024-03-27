@@ -8,7 +8,7 @@ class CarModel < ApplicationRecord
   validates :year, format: { with: /\d{4}\/[0-9]{4}/, if: -> { year.length > 4 } }
   validates :manufacture_id, presence: true
 
-  scope :with_name_and_category, -> { select('id, name || \' - \' || category as name').order(:name) }
+  scope :with_name_and_category, -> { select("id, CONCAT(name, ' - ', year, ' - ', category) AS name").order(:name) }
 
   scope :with_available_cars, -> { where(cars: { status: 'available' }) }
 

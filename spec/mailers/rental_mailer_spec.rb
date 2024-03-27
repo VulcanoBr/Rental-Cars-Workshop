@@ -12,10 +12,14 @@ RSpec.describe RentalMailer, type: :mailer do
 
       mail = RentalMailer.send_rental_receipt(rental.id)
       expect(mail.to).to include customer.email
-      expect(mail.body).to include(
-        "Segue recibo do #{car.car_model.name} - #{car.license_plate}"
-      )
-      expect(mail.body).to include "Alugado em: #{rental.created_at}"
+      expect(mail.subject).to eq "Recibo de aluguel - #{rental.rented_code}"
+     # expect(mail.body).to include(
+      #  "Segue recibo do #{car.car_model.name} - #{car.license_plate}"
+      #)
+      expect(mail.body).to include customer.name
+      expect(mail.body).to include "Alugado em: #{rental.created_at.strftime("%d/%m/%Y %H:%M:%S")}"
+      expect(mail.body).to include car.car_model.name
+      
     end
   end
   describe '#send_return_receipt' do
@@ -35,7 +39,7 @@ RSpec.describe RentalMailer, type: :mailer do
       expect(mail.subject).to eq 'Seu recibo de devolução'
       expect(mail.body).to include customer.name
       expect(mail.body).to include car.car_model.name
-      expect(mail.body).to include rental.finished_at
+      expect(mail.body).to include "Data de devolução: #{rental.finished_at}"
     end
   end
 
@@ -52,7 +56,7 @@ RSpec.describe RentalMailer, type: :mailer do
       allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
       rental = create(:rental, customer_id: customer.id, car_id: car.id, ended_at: Date.today)
       mail = described_class.send_location_canceled(rental.id) 
-      expect(mail.subject).to eq("Recibo de cancelamento - #{rental.car.license_plate}")
+      expect(mail.subject).to eq("Recibo de cancelamento - #{rental.rented_code}")
       expect(mail.to).to eq([rental.customer.email])
       expect(mail.from).to eq(['from@example.com']) # Set your sender email address
 

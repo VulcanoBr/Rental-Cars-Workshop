@@ -5,9 +5,10 @@ class RentalPresenter < SimpleDelegator
   def initialize(rental)
     super(rental)
   end
-  
-  def statusXX
-    if scheduled?
+
+  def status
+    case
+    when scheduled?
       content_tag(:span, class: "badge badge-success") do
         "Agendada"
       end
@@ -17,19 +18,6 @@ class RentalPresenter < SimpleDelegator
       end
     end
   end
-
-  def status
-    case
-    when scheduled?
-       content_tag(:span, class: "badge badge-success") do
-         "Agendada"
-       end
-    else
-       content_tag(:span, class: "badge badge-primary") do
-         "em Andamento"
-       end
-    end
-   end
 
   def withdraw_link
     links = ""

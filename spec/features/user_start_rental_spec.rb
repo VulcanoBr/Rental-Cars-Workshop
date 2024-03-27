@@ -19,7 +19,7 @@ feature 'User start rental' do
     click_on 'Agendar Locação'
 
     select car.car_identification.to_s, from: 'car-select'
-    select customer.description, from: 'customer-select'
+    select customer.description.first, from: 'customer-select'
     fill_in 'Retirada Prevista', with: "#{Date.today}"
     fill_in 'Devolução Prevista', with: "#{Date.today + 5}"
 
@@ -28,7 +28,7 @@ feature 'User start rental' do
     
     
     expect(page).to have_content(car.car_identification)
-    expect(page).to have_content(customer.description)
+    expect(page).to have_content(customer.description.first)
     expect(page).to have_link('Confirmar Retirada')
   
     click_link('Confirmar Retirada')

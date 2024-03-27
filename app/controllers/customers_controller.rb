@@ -9,12 +9,6 @@ class CustomersController < ApplicationController
 
   def show; end
 
-  def search
-    @customers = Customer.search_by_name(params[:name])
-    return :index if @customers
-    redirect_to root_path, notice: 'Nenhum cliente encontrado !!!'
-  end
-
   private
 
   def set_customer

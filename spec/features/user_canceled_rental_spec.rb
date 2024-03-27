@@ -24,7 +24,7 @@ feature 'User canceled rental' do
     click_on 'Agendar Locação'
 
     select car.car_identification, from: 'car-select'
-    select customer.description, from: 'customer-select'
+    select customer.description.first, from: 'customer-select'
     fill_in 'Retirada Prevista', with: "#{Date.today}"
     fill_in 'Devolução Prevista', with: "#{Date.today + 5}"
     

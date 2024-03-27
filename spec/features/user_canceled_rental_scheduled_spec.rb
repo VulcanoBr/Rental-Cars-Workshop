@@ -17,7 +17,7 @@ feature 'User canceled rental scheduled' do
    customer = create(:personal_customer) 
    #allow_any_instance_of(Rental).to receive(:customer_has_active_rental).and_return(nil)
    rentals = create(:scheduled_rental, car_id: car.id, user_id: user.id, 
-              customer_id: customer.id, daily_price: 234.56, status: :scheduled) 
+              customer_id: customer.id, rented_code: '2024TYR56RTUYIU', daily_price: 234.56, status: :scheduled) 
  
     
     login_as user
@@ -27,7 +27,7 @@ feature 'User canceled rental scheduled' do
     
     #visit rental_path(rentals)
     expect(page).to have_content('Carro(s) Agendado(s)')
-    click_on 'Palio - XLG-1234'
+    click_on '2024TYR56RTUYIU'
     
     expect(page).to have_link('Cancelar Locação')
   
